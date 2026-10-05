@@ -57,7 +57,7 @@ bash scripts/infra.sh
 ```
 O script pede a senha do admin SQL (sem eco) e cria: Resource Group, SQL Server + Database, regras de firewall, Log Analytics, Application Insights, App Service Plan e Web App. As credenciais ficam **somente** nos *App Settings* do Web App (`SPRING_DATASOURCE_*`), nunca no código.
 
-> Se a região `brazilsouth` recusar o SQL, altere `LOCATION` em `config.sh` (ex.: `eastus2`) e rode de novo.
+> Assinaturas de estudante restringem as regiões por política. Os scripts usam `centralus` e o `infra.sh` tenta as regiões de `SQL_LOCATIONS` (em `config.sh`) até uma aceitar o Azure SQL. Para ver as regiões liberadas na sua assinatura: `az policy assignment list --query "[].parameters.listOfAllowedLocations.value" -o json`.
 
 ### Passo 3 – Criar as tabelas
 Portal Azure → **SQL databases → dimdimdb → Query editor** → login com o usuário/senha do passo 2 → colar o conteúdo de [`scripts/ddl.sql`](scripts/ddl.sql) → **Run**.

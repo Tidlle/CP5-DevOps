@@ -3,9 +3,10 @@
 # Troque SUFIXO (ex.: RM do representante em minusculas) para gerar nomes globalmente unicos.
 SUFIXO="rm562259"
 
-LOCATION="brazilsouth"          # regiao do Resource Group, App Service e monitoramento
-# Regioes tentadas, em ordem, para o Azure SQL (algumas ficam bloqueadas por politica ou sem vaga)
-SQL_LOCATIONS=(brazilsouth eastus2 westus3 centralus westus2 northcentralus southcentralus canadacentral eastus)
+# Regioes liberadas pela politica da assinatura: southafricanorth chilecentral centralus mexicocentral eastus
+LOCATION="centralus"            # regiao do Resource Group, App Service e monitoramento
+# Regioes tentadas, em ordem, para o Azure SQL (eastus esta sem vaga para novos servidores SQL)
+SQL_LOCATIONS=(centralus mexicocentral chilecentral southafricanorth eastus)
 RG="rg-dimdim"
 PLAN="plan-dimdim"
 APP="dimdim-${SUFIXO}"

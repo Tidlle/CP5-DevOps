@@ -28,6 +28,8 @@ for r in "${SQL_LOCATIONS[@]}"; do
     SQL_REGIAO="$r"
     break
   fi
+  # remove registro residual da tentativa falha, senao o mesmo nome fica preso nessa regiao
+  az sql server delete --resource-group "$RG" --name "$SQL_SERVER" --yes >/dev/null 2>&1 || true
 done
 if [ -z "$SQL_REGIAO" ]; then
   echo "ERRO: nenhuma regiao de SQL_LOCATIONS aceitou o servidor. Edite a lista em scripts/config.sh." >&2
