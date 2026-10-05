@@ -1,10 +1,11 @@
-# DimDim – Contas e Transações (CP2 · DevOps Tools & Cloud Computing)
+# DimDimApp – Contas e Transações (CP2 · DevOps Tools & Cloud Computing)
 
-**Grupo:** _<nome do grupo>_ · **Integrantes:** _<RM – Nome>_ · **Vídeo:** _<link do vídeo>_
+**Grupo:** DimDimApp · 
+**Integrantes:** Eduardo Martins - RM562259 · **Vídeo:** _<link do vídeo>_
 
 ## 1. Descrição da solução
 
-O **DimDim** é uma aplicação web (Java 21 + Spring Boot + Thymeleaf) para gerenciar **contas** bancárias e suas **transações** (depósitos e saques).
+O **DimDimApp** é uma aplicação web (Java 21 + Spring Boot + Thymeleaf) para gerenciar **contas** bancárias e suas **transações** (depósitos e saques).
 
 - **Contas**: cadastro, listagem, edição e exclusão (número, agência, titular, saldo).
 - **Transações**: cada transação pertence a uma conta. Depósitos somam e saques subtraem do saldo da conta; saque sem saldo é recusado; editar/excluir uma transação estorna o efeito no saldo; excluir uma conta remove suas transações.
@@ -14,7 +15,7 @@ O **DimDim** é uma aplicação web (Java 21 + Spring Boot + Thymeleaf) para ger
 
 ## 2. Arquitetura
 
-![Arquitetura](docs/arquitetura.svg)
+![Arquitetura](docs/arquitetura-cp5-DevOps.png)
 
 | Recurso Azure | Função |
 |---|---|
@@ -26,8 +27,7 @@ O **DimDim** é uma aplicação web (Java 21 + Spring Boot + Thymeleaf) para ger
 
 ```
 ├── README.md
-├── docs/arquitetura.drawio  diagrama editável (draw.io)
-├── docs/arquitetura.svg     diagrama exportado (exibido no README)
+├── docs/arquitetura-cp5-DevOps.png  diagrama (exibido no README)
 ├── scripts/
 │   ├── ddl.sql        DDL das tabelas
 │   ├── config.sh      nomes dos recursos (sem segredos)
@@ -41,7 +41,7 @@ O **DimDim** é uma aplicação web (Java 21 + Spring Boot + Thymeleaf) para ger
 ## 4. How To – implantação na Azure (passo a passo)
 
 ### Pré-requisitos
-JDK 21, Maven 3.9+, [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli), Git Bash (os scripts são `bash`) e uma assinatura Azure.
+JDK 21, Maven 3.9+, Azure CLI, Git Bash (os scripts são `bash`) e uma assinatura Azure.
 
 ### Passo 1 – Login e configuração
 ```bash
