@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' - DimDim'">DimDim</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:fragment="topo">
+    <h1>DimDim</h1>
+    <a th:href="@{/contas}">Contas</a>
+    <a th:href="@{/transacoes}">Transações</a>
+</header>
+<div th:fragment="mensagens">
+    <div class="alerta ok" th:if="${sucesso}" th:text="${sucesso}"></div>
+    <div class="alerta ruim" th:if="${erro}" th:text="${erro}"></div>
+</div>
+</body>
+</html>

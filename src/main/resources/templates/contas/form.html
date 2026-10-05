@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Conta')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: topo}"></header>
+<main>
+    <div class="card">
+        <h2 th:text="${conta.id == null} ? 'Nova conta' : 'Editar conta'"></h2>
+        <form method="post" th:object="${conta}"
+              th:action="${conta.id == null} ? @{/contas} : @{/contas/{id}(id=${conta.id})}">
+            <label for="numero">Número da conta</label>
+            <input id="numero" th:field="*{numero}" maxlength="20">
+            <div class="erro" th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}"></div>
+
+            <label for="agencia">Agência</label>
+            <input id="agencia" th:field="*{agencia}" maxlength="10">
+            <div class="erro" th:if="${#fields.hasErrors('agencia')}" th:errors="*{agencia}"></div>
+
+            <label for="titular">Titular</label>
+            <input id="titular" th:field="*{titular}" maxlength="100">
+            <div class="erro" th:if="${#fields.hasErrors('titular')}" th:errors="*{titular}"></div>
+
+            <label for="saldo" th:text="${conta.id == null} ? 'Saldo inicial (R$)' : 'Saldo (R$) - alterado apenas por transações'"></label>
+            <input id="saldo" type="number" step="0.01" min="0" th:field="*{saldo}" th:readonly="${conta.id != null}">
+            <div class="erro" th:if="${#fields.hasErrors('saldo')}" th:errors="*{saldo}"></div>
+
+            <div class="acoes">
+                <button class="btn" type="submit">Salvar</button>
+                <a class="btn sec" th:href="@{/contas}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

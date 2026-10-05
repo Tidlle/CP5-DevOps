@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Contas')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: topo}"></header>
+<main>
+    <div th:replace="~{fragments/layout :: mensagens}"></div>
+    <div class="card">
+        <div class="topo">
+            <h2>Contas</h2>
+            <a class="btn" th:href="@{/contas/novo}">Nova conta</a>
+        </div>
+        <p class="vazio" th:if="${#lists.isEmpty(contas)}">Nenhuma conta cadastrada.</p>
+        <table th:unless="${#lists.isEmpty(contas)}">
+            <thead>
+            <tr><th>ID</th><th>Número</th><th>Agência</th><th>Titular</th><th class="num">Saldo</th><th>Ações</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${contas}">
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.numero}"></td>
+                <td th:text="${c.agencia}"></td>
+                <td th:text="${c.titular}"></td>
+                <td class="num" th:text="${#numbers.formatDecimal(c.saldo, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td>
+                    <a class="btn peq sec" th:href="@{/transacoes/novo(contaId=${c.id})}">Movimentar</a>
+                    <a class="btn peq" th:href="@{/contas/{id}/editar(id=${c.id})}">Editar</a>
+                    <form class="inline" method="post" th:action="@{/contas/{id}/excluir(id=${c.id})}"
+                          onsubmit="return confirm('Excluir a conta e todas as suas transações?');">
+                        <button class="btn peq perigo" type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

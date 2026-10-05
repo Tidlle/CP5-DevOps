@@ -1,0 +1,31 @@
+:root { --verde: #0b6e4f; --verde-claro: #e6f4ee; --cinza: #f4f5f7; --texto: #1f2933; --erro: #b42318; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, Arial, sans-serif; background: var(--cinza); color: var(--texto); }
+header { background: var(--verde); color: #fff; padding: 14px 32px; display: flex; align-items: center; gap: 32px; }
+header h1 { margin: 0; font-size: 1.3rem; }
+header a { color: #fff; text-decoration: none; opacity: .85; }
+header a:hover { opacity: 1; text-decoration: underline; }
+main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+.card { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+.topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+h2 { margin: 0; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #e4e7eb; }
+th { background: var(--verde-claro); }
+td.num, th.num { text-align: right; }
+.btn { display: inline-block; border: 0; border-radius: 6px; padding: 8px 14px; background: var(--verde); color: #fff; cursor: pointer; text-decoration: none; font-size: .9rem; }
+.btn.sec { background: #52606d; }
+.btn.perigo { background: var(--erro); }
+.btn.peq { padding: 4px 10px; font-size: .8rem; }
+form.inline { display: inline; }
+label { display: block; margin-top: 12px; font-weight: 600; }
+input, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #cbd2d9; border-radius: 6px; font-size: 1rem; }
+input[readonly] { background: #eceff1; }
+.erro { color: var(--erro); font-size: .85rem; margin-top: 4px; }
+.alerta { padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; }
+.alerta.ok { background: #d1fae5; color: #065f46; }
+.alerta.ruim { background: #fee2e2; color: var(--erro); }
+.entrada { color: #067647; font-weight: 600; }
+.saida { color: var(--erro); font-weight: 600; }
+.vazio { color: #7b8794; padding: 16px 0; }
+.acoes { margin-top: 20px; display: flex; gap: 8px; }

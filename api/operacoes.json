@@ -1,0 +1,54 @@
+{
+  "baseUrl": "https://dimdim-SUFIXO.azurewebsites.net",
+  "contas": {
+    "POST /api/contas": {
+      "request": { "numero": "12345-6", "agencia": "0001", "titular": "Joao Silva", "saldo": 1000.00 },
+      "response (201)": { "id": 1, "numero": "12345-6", "agencia": "0001", "titular": "Joao Silva", "saldo": 1000.00 }
+    },
+    "GET /api/contas": {
+      "response (200)": [
+        { "id": 1, "numero": "12345-6", "agencia": "0001", "titular": "Joao Silva", "saldo": 1000.00 }
+      ]
+    },
+    "GET /api/contas/1": {
+      "response (200)": { "id": 1, "numero": "12345-6", "agencia": "0001", "titular": "Joao Silva", "saldo": 1000.00 }
+    },
+    "PUT /api/contas/1": {
+      "observacao": "O saldo informado e ignorado: so muda por transacoes.",
+      "request": { "numero": "12345-6", "agencia": "0002", "titular": "Joao da Silva", "saldo": 0 },
+      "response (200)": { "id": 1, "numero": "12345-6", "agencia": "0002", "titular": "Joao da Silva", "saldo": 1000.00 }
+    },
+    "DELETE /api/contas/1": {
+      "observacao": "Remove a conta e, em cascata, suas transacoes.",
+      "response": "204 No Content"
+    }
+  },
+  "transacoes": {
+    "POST /api/transacoes": {
+      "request": { "contaId": 1, "tipo": "DEPOSITO", "valor": 250.50, "descricao": "Salario" },
+      "response (201)": { "id": 1, "tipo": "DEPOSITO", "valor": 250.50, "descricao": "Salario", "dataHora": "2026-10-05T10:30:00", "contaId": 1 }
+    },
+    "GET /api/transacoes": {
+      "response (200)": [
+        { "id": 1, "tipo": "DEPOSITO", "valor": 250.50, "descricao": "Salario", "dataHora": "2026-10-05T10:30:00", "contaId": 1 }
+      ]
+    },
+    "GET /api/transacoes/1": {
+      "response (200)": { "id": 1, "tipo": "DEPOSITO", "valor": 250.50, "descricao": "Salario", "dataHora": "2026-10-05T10:30:00", "contaId": 1 }
+    },
+    "PUT /api/transacoes/1": {
+      "observacao": "Estorna o efeito antigo no saldo e aplica o novo.",
+      "request": { "contaId": 1, "tipo": "DEPOSITO", "valor": 300.00, "descricao": "Salario corrigido" },
+      "response (200)": { "id": 1, "tipo": "DEPOSITO", "valor": 300.00, "descricao": "Salario corrigido", "dataHora": "2026-10-05T10:30:00", "contaId": 1 }
+    },
+    "DELETE /api/transacoes/1": {
+      "observacao": "Estorna o valor no saldo da conta.",
+      "response": "204 No Content"
+    }
+  },
+  "erros": {
+    "404": { "erro": "Conta 999 não encontrada" },
+    "422": { "erro": "Saldo insuficiente para o saque (conta 12345-6)" },
+    "400": { "erro": "valor: O valor deve ser maior que zero" }
+  }
+}
