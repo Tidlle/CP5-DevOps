@@ -20,8 +20,20 @@ echo ">> Resource Group"
 az group create --name "$RG" --location "$LOCATION" -o none
 
 echo ">> Azure SQL Server + Database (PaaS)"
-az sql server create --resource-group "$RG" --name "$SQL_SERVER" --location "$LOCATION" \
-  --admin-user "$SQL_USER" --admin-password "$SQL_PASS" -o none
+SQL_REGIAO=""
+for r in "${SQL_LOCATIONS[@]}"; do
+  echo "   tentando regiao $r ..."
+  if az sql server create --resource-group "$RG" --name "$SQL_SERVER" --location "$r" \
+       --admin-user "$SQL_USER" --admin-password "$SQL_PASS" -o none; then
+    SQL_REGIAO="$r"
+    break
+  fi
+done
+if [ -z "$SQL_REGIAO" ]; then
+  echo "ERRO: nenhuma regiao de SQL_LOCATIONS aceitou o servidor. Edite a lista em scripts/config.sh." >&2
+  exit 1
+fi
+echo "   SQL Server criado em: $SQL_REGIAO"
 az sql db create --resource-group "$RG" --server "$SQL_SERVER" --name "$SQL_DB" \
   --service-objective Basic --backup-storage-redundancy Local -o none
 
