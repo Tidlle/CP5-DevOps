@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Seu dinheiro, organizado')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: topo('inicio')}"></header>
+<main>
+    <section class="hero">
+        <span class="selo">BANCO DIGITAL · DIMDIMAPP</span>
+        <h1>Suas contas e transações, <em>sempre sob controle</em></h1>
+        <p>Cadastre contas, registre depósitos e saques e acompanhe seu saldo em tempo real, tudo em uma aplicação simples, rápida e na nuvem.</p>
+        <div class="botoes">
+            <a class="btn grande" th:if="${temContas}" th:href="@{/dashboard}">Abrir meu dashboard</a>
+            <a class="btn grande" th:unless="${temContas}" th:href="@{/contas/novo}">Criar minha conta</a>
+            <a class="btn grande sec" th:href="@{/contas}">Ver contas</a>
+        </div>
+    </section>
+
+    <section class="secao">
+        <h2>O que você pode fazer</h2>
+        <div class="grade">
+            <div class="card">
+                <div class="icone">🏦</div>
+                <h3>Gerenciar contas</h3>
+                <p>Crie, edite e exclua contas com número, agência, titular e saldo inicial.</p>
+            </div>
+            <div class="card">
+                <div class="icone">💸</div>
+                <h3>Registrar movimentações</h3>
+                <p>Lance depósitos e saques. O saldo da conta é atualizado automaticamente.</p>
+            </div>
+            <div class="card">
+                <div class="icone">🛡️</div>
+                <h3>Regras de segurança</h3>
+                <p>Saques acima do saldo são recusados, e editar ou excluir uma transação estorna o valor.</p>
+            </div>
+            <div class="card">
+                <div class="icone">📊</div>
+                <h3>Dashboard</h3>
+                <p>Veja saldo total, entradas, saídas, saldo por conta e as últimas movimentações.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao">
+        <h2>Como funciona</h2>
+        <div class="grade">
+            <div class="card"><div class="passo-n">1</div><h3>Crie uma conta</h3><p>Informe o titular, a agência, o número e o saldo inicial.</p></div>
+            <div class="card"><div class="passo-n">2</div><h3>Movimente</h3><p>Registre depósitos e saques vinculados à conta escolhida.</p></div>
+            <div class="card"><div class="passo-n">3</div><h3>Acompanhe</h3><p>Consulte o dashboard e o histórico de transações.</p></div>
+        </div>
+    </section>
+
+    <section class="card cta">
+        <h2>Pronto para começar?</h2>
+        <p>Leva menos de um minuto para criar a primeira conta.</p>
+        <a class="btn grande" th:href="@{/contas/novo}">Criar conta agora</a>
+    </section>
+</main>
+<footer class="rodape">DimDimApp · Azure App Service + Azure SQL Database + Application Insights</footer>
+</body>
+</html>

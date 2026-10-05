@@ -3,14 +3,19 @@
 <head th:fragment="head(titulo)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${titulo} + ' - DimDim'">DimDim</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta name="theme-color" content="#0a0a0a">
+    <title th:text="${titulo} + ' · DimDim'">DimDim</title>
+    <link rel="stylesheet" th:href="@{/css/style.css(v=2)}">
 </head>
 <body>
-<header th:fragment="topo">
-    <h1>DimDim</h1>
-    <a th:href="@{/contas}">Contas</a>
-    <a th:href="@{/transacoes}">Transações</a>
+<header class="topo-nav" th:fragment="topo(ativo)">
+    <a class="logo" th:href="@{/}">DimDim<span>App</span></a>
+    <nav>
+        <a th:href="@{/}" th:classappend="${ativo == 'inicio'} ? 'ativo'">Início</a>
+        <a th:href="@{/dashboard}" th:classappend="${ativo == 'dashboard'} ? 'ativo'">Dashboard</a>
+        <a th:href="@{/contas}" th:classappend="${ativo == 'contas'} ? 'ativo'">Contas</a>
+        <a th:href="@{/transacoes}" th:classappend="${ativo == 'transacoes'} ? 'ativo'">Transações</a>
+    </nav>
 </header>
 <div th:fragment="mensagens">
     <div class="alerta ok" th:if="${sucesso}" th:text="${sucesso}"></div>

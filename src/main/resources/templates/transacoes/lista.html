@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('Transações')}"></head>
 <body>
-<header th:replace="~{fragments/layout :: topo}"></header>
+<header th:replace="~{fragments/layout :: topo('transacoes')}"></header>
 <main>
     <div th:replace="~{fragments/layout :: mensagens}"></div>
     <div class="card">
@@ -11,7 +11,7 @@
             <a class="btn" th:href="@{/transacoes/novo}">Nova transação</a>
         </div>
         <p class="vazio" th:if="${#lists.isEmpty(transacoes)}">Nenhuma transação registrada.</p>
-        <table th:unless="${#lists.isEmpty(transacoes)}">
+        <div class="table-wrap"><table th:unless="${#lists.isEmpty(transacoes)}">
             <thead>
             <tr><th>ID</th><th>Data</th><th>Conta</th><th>Tipo</th><th class="num">Valor</th><th>Descrição</th><th>Ações</th></tr>
             </thead>
@@ -33,7 +33,7 @@
                 </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
     </div>
 </main>
 </body>

@@ -19,11 +19,6 @@ public class ContaController {
         this.service = service;
     }
 
-    @GetMapping("/")
-    public String inicio() {
-        return "redirect:/contas";
-    }
-
     @GetMapping("/contas")
     public String listar(Model model) {
         model.addAttribute("contas", service.listar());

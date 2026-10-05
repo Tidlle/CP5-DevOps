@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('Transação')}"></head>
 <body>
-<header th:replace="~{fragments/layout :: topo}"></header>
+<header th:replace="~{fragments/layout :: topo('transacoes')}"></header>
 <main>
     <div class="card">
         <h2 th:text="${transacaoId == null} ? 'Nova transação' : 'Editar transação'"></h2>

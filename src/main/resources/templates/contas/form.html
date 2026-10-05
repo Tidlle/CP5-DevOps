@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/layout :: head('Conta')}"></head>
 <body>
-<header th:replace="~{fragments/layout :: topo}"></header>
+<header th:replace="~{fragments/layout :: topo('contas')}"></header>
 <main>
     <div class="card">
         <h2 th:text="${conta.id == null} ? 'Nova conta' : 'Editar conta'"></h2>

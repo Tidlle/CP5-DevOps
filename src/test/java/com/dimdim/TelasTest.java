@@ -18,6 +18,9 @@ class TelasTest {
 
     @Test
     void telas_renderizam_e_fluxo_web_e_api_funciona() throws Exception {
+        mvc.perform(get("/")).andExpect(status().isOk());
+        mvc.perform(get("/dashboard")).andExpect(status().isOk());   // sem contas: estado vazio
+
         mvc.perform(post("/contas").param("numero", "W-1").param("agencia", "0001")
                         .param("titular", "Web").param("saldo", "100"))
                 .andExpect(status().is3xxRedirection());
@@ -34,6 +37,8 @@ class TelasTest {
                         .param("valor", "10").param("descricao", "teste"))
                 .andExpect(status().is3xxRedirection());
         mvc.perform(get("/transacoes")).andExpect(status().isOk());
+        mvc.perform(get("/dashboard")).andExpect(status().isOk())
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Saldo total")));
         mvc.perform(get("/transacoes/1/editar")).andExpect(status().isOk());
         mvc.perform(get("/api/transacoes")).andExpect(status().isOk());
         mvc.perform(get("/api/contas/999")).andExpect(status().isNotFound());

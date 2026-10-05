@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body>
+<header th:replace="~{fragments/layout :: topo('dashboard')}"></header>
+<main>
+    <!-- Sem conta criada -->
+    <div class="card estado-vazio" th:unless="${temContas}">
+        <h2>Seu dashboard está <span class="amarelo">esperando</span></h2>
+        <p>Assim que você criar a primeira conta, aqui aparecem seu saldo, entradas, saídas e as últimas movimentações.</p>
+        <a class="btn grande" th:href="@{/contas/novo}">Criar minha primeira conta</a>
+    </div>
+
+    <!-- Com conta criada -->
+    <th:block th:if="${temContas}">
+        <div class="topo">
+            <h2>Dashboard</h2>
+            <div>
+                <a class="btn sec" th:href="@{/contas/novo}">Nova conta</a>
+                <a class="btn" th:href="@{/transacoes/novo}">Nova transação</a>
+            </div>
+        </div>
+
+        <div class="kpis">
+            <div class="kpi destaque">
+                <div class="rotulo">Saldo total</div>
+                <div class="valor" th:text="'R$ ' + ${#numbers.formatDecimal(saldoTotal, 1, 'POINT', 2, 'COMMA')}"></div>
+            </div>
+            <div class="kpi">
+                <div class="rotulo">Contas</div>
+                <div class="valor" th:text="${totalContas}"></div>
+            </div>
+            <div class="kpi">
+                <div class="rotulo">Entradas (depósitos)</div>
+                <div class="valor entrada" th:text="'R$ ' + ${#numbers.formatDecimal(depositos, 1, 'POINT', 2, 'COMMA')}"></div>
+            </div>
+            <div class="kpi">
+                <div class="rotulo">Saídas (saques)</div>
+                <div class="valor saida" th:text="'R$ ' + ${#numbers.formatDecimal(saques, 1, 'POINT', 2, 'COMMA')}"></div>
+            </div>
+        </div>
+
+        <div class="dash-grid">
+            <div class="card">
+                <h2 style="font-size:1.15rem">Saldo por conta</h2>
+                <div class="barra-linha" th:each="s : ${saldos}">
+                    <div class="info">
+                        <span th:text="${s.numero + ' · ' + s.titular}"></span>
+                        <span th:text="'R$ ' + ${#numbers.formatDecimal(s.saldo, 1, 'POINT', 2, 'COMMA')}"></span>
+                    </div>
+                    <div class="barra"><i th:style="'width:' + ${s.percentual} + '%'"></i></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="topo" style="margin-bottom:4px">
+                    <h2 style="font-size:1.15rem">Últimas movimentações</h2>
+                    <a class="btn peq sec" th:href="@{/transacoes}">Ver todas</a>
+                </div>
+                <p class="vazio" th:if="${#lists.isEmpty(ultimas)}">Nenhuma transação ainda.</p>
+                <div class="mov" th:each="t : ${ultimas}">
+                    <div>
+                        <span th:text="${t.tipo.descricao}"></span>
+                        <small th:text="${t.conta.numero + ' · ' + #temporals.format(t.dataHora, 'dd/MM HH:mm')}"></small>
+                    </div>
+                    <span th:classappend="${t.tipo.name() == 'DEPOSITO'} ? 'entrada' : 'saida'"
+                          th:text="${(t.tipo.name() == 'DEPOSITO' ? '+ ' : '- ') + 'R$ ' + #numbers.formatDecimal(t.valor, 1, 'POINT', 2, 'COMMA')}"></span>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</main>
+</body>
+</html>
