@@ -1,7 +1,7 @@
 # DimDimApp – Contas e Transações (CP2 · DevOps Tools & Cloud Computing)
 
 **Grupo:** DimDimApp · 
-**Integrantes:** Eduardo Martins - RM562259 · **Vídeo:** _<link do vídeo>_
+**Integrantes:** Eduardo Martins - RM562259 · **Vídeo:** https://www.youtube.com/watch?v=DgTF5KvAIFw
 
 ## 1. Descrição da solução
 
